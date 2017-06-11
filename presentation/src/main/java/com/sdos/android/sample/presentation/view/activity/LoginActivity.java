@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.sdos.android.sample.presentation.R;
 import com.irozon.library.HideKey;
+import com.sdos.android.sample.presentation.model.UserModel;
 import com.sdos.android.sample.presentation.view.di.HasComponent;
 import com.sdos.android.sample.presentation.view.di.components.DaggerLoginComponent;
 import com.sdos.android.sample.presentation.view.di.components.LoginComponent;
@@ -57,7 +58,7 @@ public class LoginActivity extends BaseActivity implements HasComponent<LoginCom
     }
 
     @Override
-    public void onLogin() {
-        navigator.navigateToMain(this,0);
+    public void onLogin(UserModel userModel) {
+        navigator.navigateToMain(this,userModel.getTypeUser());
     }
 }

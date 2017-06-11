@@ -8,6 +8,7 @@ import java.util.List;
 public class UserModel {
 
   private String name;
+  private String pass;
   private String codeUser;
   private int typeUser;
   private List taskList;

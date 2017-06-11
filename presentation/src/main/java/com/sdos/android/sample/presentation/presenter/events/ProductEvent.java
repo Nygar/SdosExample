@@ -1,4 +1,4 @@
-package com.sdos.android.sample.presentation.presenter;
+package com.sdos.android.sample.presentation.presenter.events;
 
 import com.sdos.android.sample.presentation.data.entity.ProductEntity;
 

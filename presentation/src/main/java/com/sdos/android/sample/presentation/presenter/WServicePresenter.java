@@ -2,17 +2,15 @@ package com.sdos.android.sample.presentation.presenter;
 
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
-import com.sdos.android.sample.presentation.data.entity.ProductEntity;
 import com.sdos.android.sample.presentation.data.entity.mapper.ProductEntityDataMapper;
+import com.sdos.android.sample.presentation.presenter.events.ProductEvent;
 import com.sdos.android.sample.presentation.presenter.interactor.GetProductUseCase;
 import com.sdos.android.sample.presentation.model.ProductModel;
 import com.sdos.android.sample.presentation.view.WSView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -56,13 +54,13 @@ public class WServicePresenter implements Presenter {
    * Initializes the presenter by start retrieving the message list.
    */
   public void initialize(String category, String item) {
-    this.loadMessageList(category,item);
+    this.loadProductList(category,item);
   }
 
   /**
    * Loads all message.
    */
-  private void loadMessageList(String category, String item) {
+  private void loadProductList(String category, String item) {
     this.hideViewRetry();
     this.showViewLoading();
     this.getProductList(category, item);
@@ -84,7 +82,7 @@ public class WServicePresenter implements Presenter {
     this.wsView.hideRetry();
   }
 
-  private void showMessageCollectionInView(List<ProductModel> productModels) {
+  private void showCollectionInView(List<ProductModel> productModels) {
     this.wsView.renderProducts(productModels);
   }
 
@@ -96,6 +94,6 @@ public class WServicePresenter implements Presenter {
 
   @Subscribe
   public void onEvent(ProductEvent event) {
-    showMessageCollectionInView(productEntityDataMapper.transform(event.getEntities()));
+    showCollectionInView(productEntityDataMapper.transform(event.getEntities()));
   }
 }

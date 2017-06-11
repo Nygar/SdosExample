@@ -2,6 +2,7 @@ package com.sdos.android.sample.presentation.view.di.components;
 
 import com.sdos.android.sample.presentation.view.di.PerActivity;
 import com.sdos.android.sample.presentation.view.di.modules.ActivityModule;
+import com.sdos.android.sample.presentation.view.di.modules.LoginModule;
 import com.sdos.android.sample.presentation.view.fragment.LoginFragment;
 
 import dagger.Component;
@@ -11,7 +12,7 @@ import dagger.Component;
  * Injects user specific Fragments.
  */
 @PerActivity
-@Component(dependencies = ApplicationComponent.class, modules = {ActivityModule.class})
+@Component(dependencies = ApplicationComponent.class, modules = {ActivityModule.class, LoginModule.class})
 public interface LoginComponent extends ActivityComponent {
 
     void inject(LoginFragment loginFragment);

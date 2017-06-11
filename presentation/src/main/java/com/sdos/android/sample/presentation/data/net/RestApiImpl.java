@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.sdos.android.sample.presentation.data.cache.ProductCache;
 import com.sdos.android.sample.presentation.data.entity.ProductEntity;
-import com.sdos.android.sample.presentation.presenter.ProductEvent;
+import com.sdos.android.sample.presentation.presenter.events.ProductEvent;
 
 import org.greenrobot.eventbus.EventBus;
 

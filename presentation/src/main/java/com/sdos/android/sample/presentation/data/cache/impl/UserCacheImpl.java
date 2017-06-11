@@ -1,9 +1,12 @@
 package com.sdos.android.sample.presentation.data.cache.impl;
 
 import android.content.Context;
+
 import com.sdos.android.sample.presentation.data.cache.FileManager;
 import com.sdos.android.sample.presentation.data.cache.ProductCache;
+import com.sdos.android.sample.presentation.data.cache.UserCache;
 import com.sdos.android.sample.presentation.data.entity.ProductEntity;
+import com.sdos.android.sample.presentation.data.entity.UserEntity;
 
 import java.util.List;
 
@@ -17,9 +20,9 @@ import io.realm.RealmResults;
  * {@link ProductCache} implementation.
  */
 @Singleton
-public class ProductCacheImpl implements ProductCache {
+public class UserCacheImpl implements UserCache {
 
-  private static final String SETTINGS_KEY = "PRODUCT";
+  private static final String SETTINGS_KEY = "USER";
 
   private static final long EXPIRATION_TIME = 60 * 10 * 1000;
 
@@ -29,13 +32,13 @@ public class ProductCacheImpl implements ProductCache {
   private Realm realm;
 
   /**
-   * Constructor of the class {@link ProductCacheImpl}.
+   * Constructor of the class {@link UserCacheImpl}.
    *
    * @param context A
    * @param fileManager {@link FileManager} for saving serialized objects to the file system.
    */
   @Inject
-  public ProductCacheImpl(Context context, FileManager fileManager) {
+  public UserCacheImpl(Context context, FileManager fileManager) {
     if (context == null || fileManager == null) {
       throw new IllegalArgumentException("Invalid null parameter");
     }
@@ -60,11 +63,10 @@ public class ProductCacheImpl implements ProductCache {
   }
 
   @Override
-  public List<ProductEntity> get(String category, String item) {
+  public UserEntity get(String username, String pass) {
 
     realm= Realm.getDefaultInstance();
-    RealmResults<ProductEntity> result = realm.where(ProductEntity.class).equalTo("category",category).equalTo("item",item).findAll();
-    result.load();
+    UserEntity result = realm.where(UserEntity.class).equalTo("name",username).equalTo("pass",pass).findFirst();
 
     realm.close();
 
@@ -72,20 +74,20 @@ public class ProductCacheImpl implements ProductCache {
   }
 
   @Override
-  public void put(List<ProductEntity> productEntities) {
-    if (productEntities != null) {
-        realm= Realm.getDefaultInstance();
-        realm.executeTransaction(bgRealm -> bgRealm.copyToRealmOrUpdate(productEntities));
-        realm.close();
-        setLastCacheUpdateTimeMillis();
+  public void put(UserEntity userEntity) {
+    if (userEntity != null) {
+      realm= Realm.getDefaultInstance();
+      realm.executeTransaction(bgRealm -> bgRealm.copyToRealmOrUpdate(userEntity));
+      realm.close();
+      setLastCacheUpdateTimeMillis();
     }
   }
 
   @Override
-  public boolean isCached(String category, String item) {
+  public boolean isCached(String username, String pass) {
     boolean res = false;
     realm= Realm.getDefaultInstance();
-    RealmResults<ProductEntity> result = realm.where(ProductEntity.class).equalTo("category",category).equalTo("item",item).findAll();
+    RealmResults<UserEntity> result = realm.where(UserEntity.class).equalTo("username",username).equalTo("pass",pass).findAll();
     if(result.size()>0){
       res=true;
     }
@@ -107,9 +109,9 @@ public class ProductCacheImpl implements ProductCache {
   }
 
   @Override
-  public void evictAll(String category, String item) {
+  public void evictAll(String username, String pass) {
     realm= Realm.getDefaultInstance();
-    RealmResults<ProductEntity> result = realm.where(ProductEntity.class).equalTo("category",category).equalTo("item",item).findAll();
+    RealmResults<UserEntity> result = realm.where(UserEntity.class).equalTo("username",username).equalTo("pass",pass).findAll();
     realm.executeTransaction(bgRealm -> result.deleteAllFromRealm());
     realm.close();
   }

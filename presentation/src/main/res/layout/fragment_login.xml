@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/login_username"
             android:singleLine="true"
+            android:id="@+id/edt_username"
             />
     </android.support.design.widget.TextInputLayout>
 
@@ -38,6 +39,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/login_pass"
             android:singleLine="true"
+            android:id="@+id/edt_pass"
             />
     </android.support.design.widget.TextInputLayout>
 

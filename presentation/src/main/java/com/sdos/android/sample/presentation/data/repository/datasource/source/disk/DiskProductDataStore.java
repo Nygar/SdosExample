@@ -3,14 +3,10 @@ package com.sdos.android.sample.presentation.data.repository.datasource.source.d
 import android.os.Handler;
 
 import com.sdos.android.sample.presentation.data.cache.ProductCache;
-import com.sdos.android.sample.presentation.data.entity.ProductEntity;
 import com.sdos.android.sample.presentation.data.repository.datasource.source.ProductDataStore;
-import com.sdos.android.sample.presentation.presenter.ProductEvent;
+import com.sdos.android.sample.presentation.presenter.events.ProductEvent;
 
 import org.greenrobot.eventbus.EventBus;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * {@link ProductDataStore} implementation based on file system data store.
@@ -33,13 +29,8 @@ public class DiskProductDataStore implements ProductDataStore {
   public void productEntityList(String category, String item) {
 
     ProductEvent res = new ProductEvent();
-    List<ProductEntity> entities = new ArrayList<>();
 
-    for (ProductEntity entity: productCache.get(category,item)) {
-      entities.add(entity.getPojo());
-    }
-
-    res.setEntities(entities);
+    res.setEntities(productCache.get(category,item));
 
     new Handler().post(() -> EventBus.getDefault().post(res));
 
