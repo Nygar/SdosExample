@@ -1,0 +1,54 @@
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'realm-android'
+
+android {
+  def globalConfiguration = rootProject.extensions.getByName("ext")
+
+  compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
+  buildToolsVersion globalConfiguration["androidBuildToolsVersion"]
+
+  defaultConfig {
+    minSdkVersion globalConfiguration["androidMinSdkVersion"]
+    targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
+
+    applicationId globalConfiguration["androidApplicationId"]
+    versionCode globalConfiguration["androidVersionCode"]
+    versionName globalConfiguration["androidVersionName"]
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+}
+
+dependencies {
+  def presentationDependencies = rootProject.ext.presentationDependencies
+
+  annotationProcessor presentationDependencies.daggerCompiler
+  annotationProcessor presentationDependencies.butterKnifeCompiler
+  annotationProcessor presentationDependencies.fragmentArgsPro
+  compile presentationDependencies.dagger
+  compile presentationDependencies.butterKnife
+  compile presentationDependencies.recyclerView
+  compile presentationDependencies.cardview
+  compile presentationDependencies.appCompat
+  compile presentationDependencies.supportDesign
+  compile presentationDependencies.androidAnnotations
+  compile presentationDependencies.fragmentArgs
+  compile presentationDependencies.hideKeyboard
+  compile presentationDependencies.retrofit
+  compile presentationDependencies.retrofitGson
+
+  compile "com.daimajia.swipelayout:library:1.2.0@aar"
+
+  compile 'org.greenrobot:eventbus:3.0.0'
+
+  compile 'com.github.amitkma:stitch-lib:1.0.1'
+  annotationProcessor 'com.github.amitkma:compiler:1.0.1'
+
+
+}

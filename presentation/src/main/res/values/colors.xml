@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="very_dark_grey">#1a1a1a</color>
+
+    <color name="app_color">#0A0A0A</color>
+    <color name="ripple_color">#4d4d4d</color>
+    <color name="toolbar_color">#262626</color>
+
+    <color name="primary_color">#027AAE</color>
+    <color name="secondary_color">#2B98C8</color>
+    <color name="accent_color">#53B6E1</color>
+
+    <!--Launcher-->
+    <color name="launch_start_color">@color/accent_color</color>
+    <color name="launch_mid_color">@color/secondary_color</color>
+    <color name="launch_end_color">@color/primary_color</color>
+
+    <!--Task-->
+    <color name="task_color_complete">#00ff26</color>
+    <color name="task_color_incomplete">#ff0022</color>
+</resources>

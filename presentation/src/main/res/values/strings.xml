@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Android Clean Architecture</string>
+
+    <string name="activity_title_user_list">Users List</string>
+
+    <string name="activity_title_message_category">Categories List</string>
+    <string name="activity_title_message_list">Messages List</string>
+    <string name="activity_title_message_details">Message Details</string>
+
+    <!--Menu-->
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <!--Login-->
+    <string name="login_username">Usuario</string>
+    <string name="login_pass">Contraseña</string>
+    <string name="login_button">Login</string>
+
+    <!--Admin-->
+    <string name="admin_description">Descripción de tarea</string>
+    <string name="admin_type">Tipo de tarea</string>
+    <string name="admin_duration">Duración de tarea</string>
+    <string name="admin_button">Guardar</string>
+    <string name="admin_dialog_description">Tarea guardada</string>
+    <string name="admin_dialog_newTask">Nueva tarea</string>
+    <string name="admin_dialog_closesesion">Cerrar sesión</string>
+
+    <!--Task-->
+    <string name="technical_task_complete">COMPLETADA</string>
+    <string name="technical_task_description">Descripción</string>
+    <string name="technical_task_duration">Duración</string>
+
+    <!--WsSearch-->
+    <string name="wservice_title">Web Service</string>
+    <string name="search_category">Categoría</string>
+    <string name="search_item">Tipo</string>
+    <string name="search_button">Buscar</string>
+
+    <!--WsList-->
+    <string name="wsList_item">Tipo de producto</string>
+    <string name="wsList_category">Categoría de producto</string>
+    <string name="wsList_bussines">Empresa</string>
+    <string name="wsList_farmname">Nombre de la Granja</string>
+    <string name="wsList_phone">Telefono</string>
+
+    <string name="string_content_description">Non accessible view</string>
+    <string name="menu_filter">Filtrar</string>
+
+    <!--Exception messages-->
+    <string name="exception_message_generic">There was an application error</string>
+    <string name="exception_message_no_connection">There is no internet connection</string>
+    <string name="exception_message_user_not_found">Cannot retrieve user data. Check your internet connection</string>
+</resources>

@@ -1,0 +1,24 @@
+apply from: 'buildsystem/ci.gradle'
+apply from: 'buildsystem/dependencies.gradle'
+
+buildscript {
+  repositories {
+    jcenter()
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'com.android.tools.build:gradle:2.3.3'
+    classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'
+    classpath 'me.tatarka:gradle-retrolambda:3.4.0'
+    classpath "io.realm:realm-gradle-plugin:3.0.0"
+  }
+}
+
+allprojects {
+  ext {
+    androidApplicationId = 'com.example.sdostest'
+    androidVersionCode = 1
+    androidVersionName = "1.0"
+  }
+}
+
