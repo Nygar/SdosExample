@@ -46,6 +46,7 @@ dependencies {
   compile presentationDependencies.stitchCompiler
   compile presentationDependencies.eventbus
   compile presentationDependencies.swipelayout
+  compile presentationDependencies.validationEdTx
 
 
 }

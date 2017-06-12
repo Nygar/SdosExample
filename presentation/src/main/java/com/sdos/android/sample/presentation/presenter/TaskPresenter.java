@@ -81,6 +81,7 @@ public class TaskPresenter implements Presenter {
   }
 
   public void getTaskList(int idUser) {
+    hideViewRetry();
     getTaskUseCase.setParamsForGetTask(idUser);
   }
 
@@ -94,7 +95,11 @@ public class TaskPresenter implements Presenter {
 
   @Subscribe
   public void onEvent(TaskEvent event) {
-    showCollectionInView(taskEntityDataMapper.transform(event.getEntities()));
+    if(event.getEntities().size()>0) {
+      showCollectionInView(taskEntityDataMapper.transform(event.getEntities()));
+    }else{
+      showViewRetry();
+    }
   }
 
   @Subscribe

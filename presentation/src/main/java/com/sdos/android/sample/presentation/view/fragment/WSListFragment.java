@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.hannesdorfmann.fragmentargs.FragmentArgs;
 import com.hannesdorfmann.fragmentargs.annotation.Arg;
@@ -39,6 +40,11 @@ public class WSListFragment extends BaseFragment implements WSView {
 
     @BindView(R.id.wslist_recycleview)
     RecyclerView recyclerView;
+
+    @BindView(R.id.rl_progress)
+    RelativeLayout loadView;
+    @BindView(R.id.retry_view)
+    RelativeLayout retryView;
 
     @Inject
     ItemModelAdapter itemModelAdapter;
@@ -98,22 +104,23 @@ public class WSListFragment extends BaseFragment implements WSView {
 
     @Override
     public void showLoading() {
-
+        loadView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-
+        loadView.setVisibility(View.GONE);
     }
 
     @Override
     public void showRetry() {
+        retryView.setVisibility(View.VISIBLE);
 
     }
 
     @Override
     public void hideRetry() {
-
+        retryView.setVisibility(View.GONE);
     }
 
     @Override

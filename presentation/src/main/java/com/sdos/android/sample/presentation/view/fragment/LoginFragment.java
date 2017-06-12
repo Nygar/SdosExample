@@ -1,21 +1,29 @@
 package com.sdos.android.sample.presentation.view.fragment;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.mobsandgeeks.saripaar.ValidationError;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.sdos.android.sample.presentation.R;
 import com.sdos.android.sample.presentation.model.UserModel;
 import com.sdos.android.sample.presentation.presenter.UserPresenter;
 import com.sdos.android.sample.presentation.view.LoginView;
 import com.sdos.android.sample.presentation.view.di.components.LoginComponent;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
+import butterknife.BindDrawable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -23,11 +31,11 @@ import butterknife.OnClick;
 /**
  * Fragment for login users.
  */
-public class LoginFragment extends BaseFragment implements LoginView {
-
+public class LoginFragment extends BaseFragment implements LoginView,Validator.ValidationListener {
+    @NotEmpty(messageResId = R.string.exception_empty_edt)
     @BindView(R.id.edt_username)
     EditText editTextUsername;
-
+    @NotEmpty(messageResId = R.string.exception_empty_edt)
     @BindView(R.id.edt_pass)
     EditText editTextPass;
 
@@ -39,6 +47,8 @@ public class LoginFragment extends BaseFragment implements LoginView {
     }
 
     private LoginInterface loginInterface;
+
+    private Validator validator;
 
     @Inject
     UserPresenter userPresenter;
@@ -68,6 +78,9 @@ public class LoginFragment extends BaseFragment implements LoginView {
                              Bundle savedInstanceState) {
         final View fragmentView = inflater.inflate(R.layout.fragment_login, container, false);
         ButterKnife.bind(this, fragmentView);
+
+        validator = new Validator(this);
+        validator.setValidationListener(this);
 
         return fragmentView;
     }
@@ -121,7 +134,28 @@ public class LoginFragment extends BaseFragment implements LoginView {
 
     @OnClick(R.id.loginButton)
     void onLogin(){
+        validator.validate();
+
+    }
+
+    @Override
+    public void onValidationSucceeded() {
         userPresenter.initialize(editTextUsername.getText().toString(),editTextPass.getText().toString());
+    }
+
+    @Override
+    public void onValidationFailed(List<ValidationError> errors) {
+        for (ValidationError error : errors) {
+            View view = error.getView();
+            String message = error.getCollatedErrorMessage(getContext());
+
+            // Display error messages ;)
+            if (view instanceof EditText) {
+                ((EditText) view).setError(message);
+            } else {
+                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
 }

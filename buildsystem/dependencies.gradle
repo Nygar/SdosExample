@@ -15,8 +15,6 @@ ext {
   daggerVersion = '2.8'
   butterKnifeVersion = '8.4.0'
   androidSupport = '25.0.0'
-  rxJavaVersion = '2.0.8'
-  rxAndroidVersion = '2.0.1'
   gsonVersion = '2.5'
   retrofit = '2.2.0'
   fragmentArgs = '3.0.2'
@@ -24,6 +22,7 @@ ext {
   swipelayout = '1.2.0@aar'
   eventbus ='3.0.0'
   stitch='1.0.1'
+  validationEdTx = '2.0.3'
 
   presentationDependencies = [
       daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
@@ -42,6 +41,7 @@ ext {
       retrofitGson:       "com.squareup.retrofit2:converter-gson:${retrofit}",
       swipelayout:        "com.daimajia.swipelayout:library:${swipelayout}",
       eventbus:           "org.greenrobot:eventbus:${eventbus}",
+      validationEdTx:     "com.mobsandgeeks:android-saripaar:${validationEdTx}",
       stitchCompiler:     "com.github.amitkma:stitch-lib:${stitch}",
       stitchAnottation:   "com.github.amitkma:compiler:${stitch}"
 

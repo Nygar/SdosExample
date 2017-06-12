@@ -96,6 +96,11 @@ public class WServicePresenter implements Presenter {
 
   @Subscribe
   public void onEvent(ProductEvent event) {
-    showCollectionInView(productEntityDataMapper.transform(event.getEntities()));
+    hideViewLoading();
+    if(event.getEntities().size()>0) {
+      showCollectionInView(productEntityDataMapper.transform(event.getEntities()));
+    }else{
+      showViewRetry();
+    }
   }
 }

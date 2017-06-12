@@ -2,6 +2,7 @@ package com.sdos.android.sample.presentation.view.fragment;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,7 +14,11 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.mobsandgeeks.saripaar.ValidationError;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.sdos.android.sample.presentation.R;
 import com.sdos.android.sample.presentation.model.TaskModel;
 import com.sdos.android.sample.presentation.presenter.TaskPresenter;
@@ -25,6 +30,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindArray;
+import butterknife.BindDrawable;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,7 +39,7 @@ import butterknife.OnClick;
 /**
  * Fragment for login users.
  */
-public class AdminFragment extends BaseFragment implements MainView {
+public class AdminFragment extends BaseFragment implements MainView,Validator.ValidationListener {
 
     @BindView(R.id.admin_text_progress)
     TextView textProgress;
@@ -44,6 +50,7 @@ public class AdminFragment extends BaseFragment implements MainView {
     @BindView(R.id.admin_type_task_spinner)
     Spinner spinner;
 
+    @NotEmpty(messageResId = R.string.exception_empty_edt)
     @BindView(R.id.task_name)
     EditText taskName;
 
@@ -52,6 +59,8 @@ public class AdminFragment extends BaseFragment implements MainView {
 
     @Inject
     TaskPresenter taskPresenter;
+
+    private Validator validator;
 
     /**
      * Interface for listening events.
@@ -91,6 +100,9 @@ public class AdminFragment extends BaseFragment implements MainView {
         final View fragmentView = inflater.inflate(R.layout.fragment_admin, container, false);
         ButterKnife.bind(this, fragmentView);
         inicializeFragment();
+
+        validator = new Validator(this);
+        validator.setValidationListener(this);
 
         return fragmentView;
     }
@@ -132,18 +144,8 @@ public class AdminFragment extends BaseFragment implements MainView {
     @OnClick(R.id.admin_saveButton)
     void saveTask(){
 
-        taskModel.setEnd(false);
-        taskModel.setDuration(Integer.parseInt(textProgress.getText().toString()));
-        taskModel.setName(taskName.getText().toString());
+        validator.validate();
 
-        taskPresenter.postTask(taskModel);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(R.string.admin_dialog_description)
-                .setPositiveButton(R.string.admin_dialog_closesesion, (dialog, id) -> adminInterface.onCloseSesion())
-                .setNegativeButton(R.string.admin_dialog_newTask, (dialog, id) -> dialog.dismiss());
-
-        builder.create().show();
     }
 
     @Override
@@ -195,7 +197,36 @@ public class AdminFragment extends BaseFragment implements MainView {
 
     @Override
     public void responseTask(String response) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage(R.string.admin_dialog_description)
+                .setPositiveButton(R.string.admin_dialog_closesesion, (dialog, id) -> adminInterface.onCloseSesion())
+                .setNegativeButton(R.string.admin_dialog_newTask, (dialog, id) -> dialog.dismiss());
 
+        builder.create().show();
+    }
+
+    @Override
+    public void onValidationSucceeded() {
+        taskModel.setEnd(false);
+        taskModel.setDuration(Integer.parseInt(textProgress.getText().toString()));
+        taskModel.setName(taskName.getText().toString());
+
+        taskPresenter.postTask(taskModel);
+    }
+
+    @Override
+    public void onValidationFailed(List<ValidationError> errors) {
+        for (ValidationError error : errors) {
+            View view = error.getView();
+            String message = error.getCollatedErrorMessage(getContext());
+
+            // Display error messages ;)
+            if (view instanceof EditText) {
+                ((EditText) view).setError(message);
+            } else {
+                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
 }

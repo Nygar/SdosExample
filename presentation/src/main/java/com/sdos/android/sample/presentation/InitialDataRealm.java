@@ -30,10 +30,6 @@ public class InitialDataRealm implements Realm.Transaction{
             typeTaskUser2.add(new IntegerRealmObject(3));
             realm1.insert(new UserEntity(5,"Sarah López", "1234", "03", 1, typeTaskUser2));
 
-            realm1.insert(new TaskEntity("Recolectar",3, "Recolectar", 4, false, 1, "4"));
-            realm1.insert(new TaskEntity("Recolectar2",3, "Recolectar", 4, true, 2, "4"));
-            realm1.insert(new TaskEntity("Recolectar3",3, "Recolectar", 4, false, 3, "3"));
-            realm1.insert(new TaskEntity("Recolectar4",3, "Recolectar", 4, false, 4, "4"));
         });
 
         realm.close();

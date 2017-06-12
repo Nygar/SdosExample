@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.daimajia.swipe.util.Attributes;
 import com.hannesdorfmann.fragmentargs.FragmentArgs;
@@ -39,6 +40,9 @@ public class TechnicalFragment extends BaseFragment implements MainView {
 
     @BindView(R.id.technical_recycleview)
     RecyclerView recyclerView;
+
+    @BindView(R.id.retry_view)
+    RelativeLayout retryView;
 
     @Inject
     TaskModelAdapter taskModelAdapter;
@@ -104,12 +108,12 @@ public class TechnicalFragment extends BaseFragment implements MainView {
 
     @Override
     public void showRetry() {
-
+        retryView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideRetry() {
-
+        retryView.setVisibility(View.GONE);
     }
 
     @Override
