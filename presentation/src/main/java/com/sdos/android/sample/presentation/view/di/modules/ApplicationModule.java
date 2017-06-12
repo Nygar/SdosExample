@@ -4,13 +4,17 @@ import android.content.Context;
 
 import com.sdos.android.sample.presentation.InitialDataRealm;
 import com.sdos.android.sample.presentation.data.cache.ProductCache;
+import com.sdos.android.sample.presentation.data.cache.TaskCache;
 import com.sdos.android.sample.presentation.data.cache.UserCache;
 import com.sdos.android.sample.presentation.data.cache.impl.ProductCacheImpl;
 import com.sdos.android.sample.presentation.AndroidApplication;
+import com.sdos.android.sample.presentation.data.cache.impl.TaskCacheImpl;
 import com.sdos.android.sample.presentation.data.cache.impl.UserCacheImpl;
 import com.sdos.android.sample.presentation.data.repository.ProductsDataRepository;
+import com.sdos.android.sample.presentation.data.repository.TaskDataRepository;
 import com.sdos.android.sample.presentation.data.repository.UserDataRepository;
 import com.sdos.android.sample.presentation.presenter.interactor.GetProductUseCase;
+import com.sdos.android.sample.presentation.presenter.interactor.GetTaskUseCase;
 import com.sdos.android.sample.presentation.presenter.interactor.GetUserUseCase;
 
 import javax.inject.Singleton;
@@ -59,5 +63,15 @@ public class ApplicationModule {
   @Provides @Singleton
   GetUserUseCase.UserRepository provideUserRepository(UserDataRepository userDataRepository) {
     return userDataRepository;
+  }
+
+  @Provides @Singleton
+  TaskCache provideTaskCache(TaskCacheImpl taskCache) {
+    return taskCache;
+  }
+
+  @Provides @Singleton
+  GetTaskUseCase.TaskRepository provideTaskRepository(TaskDataRepository taskDataRepository) {
+    return taskDataRepository;
   }
 }

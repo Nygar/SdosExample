@@ -10,6 +10,8 @@ public class TaskModel {
   private String description;
   private int duration;
   private boolean end;
+  private String idTask;
+  private String userId;
 
   public TaskModel() {
   }
@@ -57,5 +59,21 @@ public class TaskModel {
 
   public void setEnd(boolean end) {
     this.end = end;
+  }
+
+  public String getIdTask() {
+    return idTask;
+  }
+
+  public void setIdTask(String idTask) {
+    this.idTask = idTask;
+  }
+
+  public String getUserId() {
+    return userId;
+  }
+
+  public void setUserId(String userId) {
+    this.userId = userId;
   }
 }

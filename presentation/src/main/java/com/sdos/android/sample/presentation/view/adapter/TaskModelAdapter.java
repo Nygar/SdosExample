@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
@@ -73,6 +74,8 @@ public class TaskModelAdapter extends RecyclerSwipeAdapter<TaskModelAdapter.Base
 
         holder.swipeLayout.setShowMode(SwipeLayout.ShowMode.PullOut);
 
+        holder.taskName.setText(model.getName());
+
         if(model.isEnd()){
             holder.img.setImageResource(R.drawable.ic_check_black_24dp);
             holder.swipeLayout.setRightSwipeEnabled(false);
@@ -126,6 +129,9 @@ public class TaskModelAdapter extends RecyclerSwipeAdapter<TaskModelAdapter.Base
 
         @BindView(R.id.row_task_check)
         ImageView img;
+
+        @BindView(R.id.task_name)
+        TextView taskName;
 
         public BaseViewHolder(View itemView) {
             super(itemView);

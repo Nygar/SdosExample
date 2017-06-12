@@ -59,6 +59,6 @@ public class LoginActivity extends BaseActivity implements HasComponent<LoginCom
 
     @Override
     public void onLogin(UserModel userModel) {
-        navigator.navigateToMain(this,userModel.getTypeUser());
+        navigator.navigateToMain(this,userModel.getTypeUser(),userModel.getId());
     }
 }

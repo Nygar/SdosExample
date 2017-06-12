@@ -10,6 +10,7 @@ import io.realm.RealmObject;
  */
 public class UserEntity extends RealmObject{
 
+  private int id;
   private String name;
   private String pass;
   private String codeUser;
@@ -19,7 +20,8 @@ public class UserEntity extends RealmObject{
   public UserEntity() {
   }
 
-  public UserEntity(String name, String pass, String codeUser, int typeUser, List<IntegerRealmObject>integerRealmObjects) {
+  public UserEntity(int id,String name, String pass, String codeUser, int typeUser, List<IntegerRealmObject>integerRealmObjects) {
+    this.id=id;
     this.name = name;
     this.pass = pass;
     this.codeUser = codeUser;
@@ -60,5 +62,21 @@ public class UserEntity extends RealmObject{
 
   public void setTaskList(List<IntegerRealmObject> taskList) {
       this.taskList.addAll(taskList);
+  }
+
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public String getPass() {
+    return pass;
+  }
+
+  public void setPass(String pass) {
+    this.pass = pass;
   }
 }

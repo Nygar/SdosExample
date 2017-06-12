@@ -12,6 +12,8 @@ public class TaskEntity extends RealmObject {
   private String description;
   private int duration;
   private boolean end;
+  private String idTask;
+  private String userId;
 
   public TaskEntity() {
   }
@@ -22,6 +24,16 @@ public class TaskEntity extends RealmObject {
     this.description = description;
     this.duration = duration;
     this.end = end;
+  }
+
+  public TaskEntity(String name, int typeTask, String description, int duration, boolean end, String idTask, String userId) {
+    this.name = name;
+    this.typeTask = typeTask;
+    this.description = description;
+    this.duration = duration;
+    this.end = end;
+    this.idTask = idTask;
+    this.userId = userId;
   }
 
   public TaskEntity(String name, boolean end) {
@@ -67,5 +79,21 @@ public class TaskEntity extends RealmObject {
 
   public void setEnd(boolean end) {
     this.end = end;
+  }
+
+  public String getIdTask() {
+    return idTask;
+  }
+
+  public void setIdTask(String idTask) {
+    this.idTask = idTask;
+  }
+
+  public String getUserId() {
+    return userId;
+  }
+
+  public void setUserId(String userId) {
+    this.userId = userId;
   }
 }

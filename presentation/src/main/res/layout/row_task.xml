@@ -66,6 +66,7 @@
         android:layout_height="wrap_content"
         android:text="@string/technical_task_description"
         android:textColor="@color/black"
+        android:id="@+id/task_name"
         />
     <TextView
         android:layout_width="match_parent"

@@ -3,6 +3,7 @@ package com.sdos.android.sample.presentation.view.di.components;
 import android.content.Context;
 
 import com.sdos.android.sample.presentation.presenter.interactor.GetProductUseCase;
+import com.sdos.android.sample.presentation.presenter.interactor.GetTaskUseCase;
 import com.sdos.android.sample.presentation.presenter.interactor.GetUserUseCase;
 import com.sdos.android.sample.presentation.view.di.modules.ApplicationModule;
 import com.sdos.android.sample.presentation.view.activity.BaseActivity;
@@ -24,4 +25,5 @@ public interface ApplicationComponent {
 
   GetProductUseCase.ProductRepository productRepository();
   GetUserUseCase.UserRepository userRepository();
+  GetTaskUseCase.TaskRepository taskRepository();
 }

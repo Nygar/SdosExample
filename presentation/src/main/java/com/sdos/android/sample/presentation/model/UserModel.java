@@ -11,7 +11,9 @@ public class UserModel {
   private String pass;
   private String codeUser;
   private int typeUser;
-  private List taskList;
+  private List<Integer> taskList;
+  private int id;
+
 
   public UserModel() {
   }
@@ -40,11 +42,27 @@ public class UserModel {
     this.typeUser = typeUser;
   }
 
-  public List getTaskList() {
+  public List<Integer> getTaskList() {
     return taskList;
   }
 
-  public void setTaskList(List taskList) {
+  public void setTaskList(List<Integer> taskList) {
     this.taskList = taskList;
+  }
+
+  public String getPass() {
+    return pass;
+  }
+
+  public void setPass(String pass) {
+    this.pass = pass;
+  }
+
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
   }
 }

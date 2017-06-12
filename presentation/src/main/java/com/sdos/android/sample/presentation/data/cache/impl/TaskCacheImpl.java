@@ -4,8 +4,8 @@ import android.content.Context;
 
 import com.sdos.android.sample.presentation.data.cache.FileManager;
 import com.sdos.android.sample.presentation.data.cache.ProductCache;
+import com.sdos.android.sample.presentation.data.cache.TaskCache;
 import com.sdos.android.sample.presentation.data.cache.UserCache;
-import com.sdos.android.sample.presentation.data.entity.ProductEntity;
 import com.sdos.android.sample.presentation.data.entity.TaskEntity;
 import com.sdos.android.sample.presentation.data.entity.UserEntity;
 
@@ -21,7 +21,7 @@ import io.realm.RealmResults;
  * {@link ProductCache} implementation.
  */
 @Singleton
-public class UserCacheImpl implements UserCache {
+public class TaskCacheImpl implements TaskCache {
 
   private static final String SETTINGS_KEY = "USER";
 
@@ -33,13 +33,13 @@ public class UserCacheImpl implements UserCache {
   private Realm realm;
 
   /**
-   * Constructor of the class {@link UserCacheImpl}.
+   * Constructor of the class {@link TaskCacheImpl}.
    *
    * @param context A
    * @param fileManager {@link FileManager} for saving serialized objects to the file system.
    */
   @Inject
-  public UserCacheImpl(Context context, FileManager fileManager) {
+  public TaskCacheImpl(Context context, FileManager fileManager) {
     if (context == null || fileManager == null) {
       throw new IllegalArgumentException("Invalid null parameter");
     }
@@ -64,10 +64,9 @@ public class UserCacheImpl implements UserCache {
   }
 
   @Override
-  public UserEntity get(String username, String pass) {
-
+  public List<TaskEntity> get(int userId) {
     realm= Realm.getDefaultInstance();
-    UserEntity result = realm.where(UserEntity.class).equalTo("name",username).equalTo("pass",pass).findFirst();
+    RealmResults<TaskEntity> result = realm.where(TaskEntity.class).equalTo("userId", String.valueOf(userId)).findAll();
 
     realm.close();
 
@@ -75,7 +74,7 @@ public class UserCacheImpl implements UserCache {
   }
 
   @Override
-  public void put(UserEntity userEntity) {
+  public void put(TaskEntity userEntity, int userId) {
     if (userEntity != null) {
       realm= Realm.getDefaultInstance();
       realm.executeTransaction(bgRealm -> bgRealm.copyToRealmOrUpdate(userEntity));
@@ -85,10 +84,10 @@ public class UserCacheImpl implements UserCache {
   }
 
   @Override
-  public boolean isCached(String username, String pass) {
+  public boolean isCached(int userId) {
     boolean res = false;
     realm= Realm.getDefaultInstance();
-    RealmResults<UserEntity> result = realm.where(UserEntity.class).equalTo("username",username).equalTo("pass",pass).findAll();
+    RealmResults<TaskEntity> result = realm.where(TaskEntity.class).equalTo("userId",String.valueOf(userId)).findAll();
     if(result.size()>0){
       res=true;
     }
@@ -97,22 +96,22 @@ public class UserCacheImpl implements UserCache {
   }
 
   @Override
-  public boolean isExpired(String category, String item) {
+  public boolean isExpired(int userId) {
     long currentTime = System.currentTimeMillis();
     long lastUpdateTime = this.getLastCacheUpdateTimeMillis();
 
     boolean expired = ((currentTime - lastUpdateTime) > EXPIRATION_TIME);
 
     if (expired) {
-      this.evictAll(category,item);
+      this.evictAll(userId);
     }
     return expired;
   }
 
   @Override
-  public void evictAll(String username, String pass) {
+  public void evictAll(int userId) {
     realm= Realm.getDefaultInstance();
-    RealmResults<UserEntity> result = realm.where(UserEntity.class).equalTo("username",username).equalTo("pass",pass).findAll();
+    RealmResults<TaskEntity> result = realm.where(TaskEntity.class).equalTo("userId",String.valueOf(userId)).findAll();
     realm.executeTransaction(bgRealm -> result.deleteAllFromRealm());
     realm.close();
   }

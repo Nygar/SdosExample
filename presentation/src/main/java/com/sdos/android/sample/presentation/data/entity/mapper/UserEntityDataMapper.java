@@ -1,5 +1,6 @@
 package com.sdos.android.sample.presentation.data.entity.mapper;
 
+import com.sdos.android.sample.presentation.data.entity.IntegerRealmObject;
 import com.sdos.android.sample.presentation.data.entity.UserEntity;
 import com.sdos.android.sample.presentation.model.UserModel;
 
@@ -29,8 +30,15 @@ public class UserEntityDataMapper {
     if (userEntity != null) {
       res.setCodeUser(userEntity.getCodeUser());
       res.setName(userEntity.getName());
-      res.setTaskList(userEntity.getTaskList());
       res.setTypeUser(userEntity.getTypeUser());
+      res.setId(userEntity.getId());
+
+      List<Integer> integers = new ArrayList<>();
+      for (IntegerRealmObject i: userEntity.getTaskList()) {
+        integers.add(i.getInteger());
+      }
+
+      res.setTaskList(integers);
     }
 
     return res;

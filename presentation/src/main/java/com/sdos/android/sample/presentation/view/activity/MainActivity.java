@@ -14,6 +14,7 @@ import com.sdos.android.sample.presentation.view.di.components.DaggerMainCompone
 import com.sdos.android.sample.presentation.view.di.components.MainComponent;
 import com.sdos.android.sample.presentation.view.fragment.AdminFragment;
 import com.sdos.android.sample.presentation.view.fragment.TechnicalFragment;
+import com.sdos.android.sample.presentation.view.fragment.TechnicalFragmentBuilder;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,9 +25,11 @@ import butterknife.ButterKnife;
 public class MainActivity extends BaseActivity implements HasComponent<MainComponent>,AdminFragment.AdminInterface{
 
 
-    public static Intent getCallingIntent(Context context, int option) {
+    public static Intent getCallingIntent(Context context, int option,int idUser) {
         Intent intent = new Intent(context, MainActivity.class);
         intent.putExtra("INTENT_MAIN_OPTION_VALUE",option);
+        intent.putExtra("INTENT_MAIN_IDUSER_VALUE",idUser);
+
         return intent;
     }
 
@@ -60,8 +63,12 @@ public class MainActivity extends BaseActivity implements HasComponent<MainCompo
         toolbar.setTitle("");
         setActionBar(toolbar);
         if (savedInstanceState == null) {
-            //addFragment(R.id.content_frame, new AdminFragment());
-            addFragment(R.id.content_frame, new TechnicalFragment());
+
+            if(getIntent().getIntExtra("INTENT_MAIN_OPTION_VALUE",0)==0) {
+                addFragment(R.id.content_frame, new AdminFragment());
+            }else{
+                addFragment(R.id.content_frame,  new TechnicalFragmentBuilder(getIntent().getIntExtra("INTENT_MAIN_IDUSER_VALUE",0)).build());
+            }
         }
     }
 
