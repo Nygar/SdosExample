@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.sdos.android.sample.presentation.R;
 import com.sdos.android.sample.presentation.model.ProductModel;
@@ -57,6 +58,12 @@ public class ItemModelAdapter extends RecyclerView.Adapter<ItemModelAdapter.Base
     public void onBindViewHolder(BaseViewHolder holder, final int position) {
         final ProductModel model = this.privateModels.get(position);
 
+        holder.type.setText(model.getItem());
+        holder.category.setText(model.getCategory());
+        holder.bussines.setText(model.getBusiness());
+        holder.farm.setText(model.getFarm_name());
+        holder.phone.setText(model.getPhone1());
+
     }
 
     public void setCollection(List<ProductModel> collection) {
@@ -74,6 +81,17 @@ public class ItemModelAdapter extends RecyclerView.Adapter<ItemModelAdapter.Base
 
         @BindView(R.id.item_cardView)
         CardView cardView;
+
+        @BindView(R.id.item_type)
+        TextView type;
+        @BindView(R.id.item_category)
+        TextView category;
+        @BindView(R.id.item_bussines)
+        TextView bussines;
+        @BindView(R.id.item_farm)
+        TextView farm;
+        @BindView(R.id.item_phone)
+        TextView phone;
 
         public BaseViewHolder(View itemView) {
             super(itemView);

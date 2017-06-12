@@ -75,6 +75,7 @@ public class TaskModelAdapter extends RecyclerSwipeAdapter<TaskModelAdapter.Base
         holder.swipeLayout.setShowMode(SwipeLayout.ShowMode.PullOut);
 
         holder.taskName.setText(model.getName());
+        holder.taskDuration.setText(model.getDuration() + " Horas");
 
         if(model.isEnd()){
             holder.img.setImageResource(R.drawable.ic_check_black_24dp);
@@ -132,6 +133,9 @@ public class TaskModelAdapter extends RecyclerSwipeAdapter<TaskModelAdapter.Base
 
         @BindView(R.id.task_name)
         TextView taskName;
+
+        @BindView(R.id.task_duration)
+        TextView taskDuration;
 
         public BaseViewHolder(View itemView) {
             super(itemView);

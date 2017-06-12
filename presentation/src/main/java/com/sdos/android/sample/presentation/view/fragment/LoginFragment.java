@@ -24,6 +24,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindDrawable;
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -38,6 +39,9 @@ public class LoginFragment extends BaseFragment implements LoginView,Validator.V
     @NotEmpty(messageResId = R.string.exception_empty_edt)
     @BindView(R.id.edt_pass)
     EditText editTextPass;
+
+    @BindString(R.string.exception_usernotfound)
+    String userNotFound;
 
     /**
      * Interface for listening events.
@@ -129,7 +133,11 @@ public class LoginFragment extends BaseFragment implements LoginView,Validator.V
 
     @Override
     public void renderUserLogin(UserModel userModel) {
-        loginInterface.onLogin(userModel);
+        if(userModel.getName()!=null) {
+            loginInterface.onLogin(userModel);
+        }else{
+            Toast.makeText(getContext(),userNotFound,Toast.LENGTH_SHORT).show();
+        }
     }
 
     @OnClick(R.id.loginButton)

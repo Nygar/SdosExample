@@ -56,24 +56,64 @@
    <LinearLayout
        android:layout_width="0dp"
        android:layout_weight="1"
-       android:layout_height="match_parent"
+       android:layout_height="100dp"
        android:orientation="vertical"
        android:paddingLeft="30dp"
        >
 
-    <TextView
+    <!--Item-->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/technical_task_description"
-        android:textColor="@color/black"
-        android:id="@+id/task_name"
-        />
-    <TextView
+        android:orientation="horizontal"
+        android:layout_margin="10dp"
+        >
+     <TextView
+         android:layout_width="0dp"
+         android:layout_weight="0.3"
+         android:layout_height="wrap_content"
+         android:text="@string/technical_task_description"
+         android:textColor="@color/very_dark_grey"
+         android:gravity="center"
+         />
+
+     <TextView
+         android:layout_width="0dp"
+         android:layout_weight="0.7"
+         android:layout_height="match_parent"
+         android:textColor="@color/black"
+         android:gravity="center"
+         android:id="@+id/task_name"
+         />
+
+    </LinearLayout>
+
+    <!--Item-->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/technical_task_duration"
-        android:textColor="@color/black"
-        />
+        android:orientation="horizontal"
+        android:layout_margin="10dp"
+        >
+     <TextView
+         android:layout_width="0dp"
+         android:layout_weight="0.3"
+         android:layout_height="wrap_content"
+         android:text="@string/technical_task_duration"
+         android:textColor="@color/very_dark_grey"
+         android:gravity="center"
+         />
+
+     <TextView
+         android:layout_width="0dp"
+         android:layout_weight="0.7"
+         android:layout_height="match_parent"
+         android:textColor="@color/black"
+         android:gravity="center"
+         android:id="@+id/task_duration"
+         />
+
+    </LinearLayout>
 
    </LinearLayout>
   </LinearLayout>
