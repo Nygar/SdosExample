@@ -56,4 +56,25 @@ public class TaskEntityDataMapper {
     return outputlist;
   }
 
+  /**
+   * Transform a {@link TaskModel} into an {@link TaskEntity}.
+   *
+   * @param taskEntity Object to be transformed.
+   * @return {@link TaskEntity} if valid {@link TaskModel} otherwise null.
+   */
+  public TaskEntity  transform( TaskModel taskEntity) {
+    TaskEntity res = new TaskEntity();
+    if (taskEntity != null) {
+      res.setEnd(taskEntity.isEnd());
+      res.setName(taskEntity.getName());
+      res.setDescription(taskEntity.getDescription());
+      res.setDuration(taskEntity.getDuration());
+      res.setTypeTask(taskEntity.getTypeTask());
+      res.setIdTask(taskEntity.getIdTask());
+      res.setUserId(taskEntity.getUserId());
+    }
+
+    return res;
+  }
+
 }

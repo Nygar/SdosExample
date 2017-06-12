@@ -18,31 +18,29 @@ public class GetTaskUseCase {
    */
   public interface TaskRepository {
     void getTask(int idUser);
-    void postTask(TaskEntity taskEntity,int idUser);
+    void postTask(TaskEntity taskEntity);
+    void updateTask(int idTask);
   }
-
-  private TaskEntity taskEntity;
-  private int idUser;
 
   public static final int PRIORITY = 1;
-  private TaskRepository productRepository;
+  private TaskRepository taskRepository;
 
   @Inject
-  public GetTaskUseCase(TaskRepository productRepository) {
-    this.productRepository = productRepository;
+  public GetTaskUseCase(TaskRepository taskRepository) {
+    this.taskRepository = taskRepository;
   }
+
 
   @CallOnAnyThread
-  public void execute(){
-    if(taskEntity!=null) {
-      productRepository.postTask(taskEntity,idUser);
-    }else{
-      productRepository.getTask(idUser);
-    }
+  public void setParamsForGetTask(int idUser){
+    taskRepository.getTask(idUser);
   }
-
-  public void setParams(TaskEntity taskEntity,int idUser){
-    this.taskEntity=taskEntity;
-    this.idUser=idUser;
+  @CallOnAnyThread
+  public void setParamsForPostTask(TaskEntity taskEntity){
+    taskRepository.postTask(taskEntity);
+  }
+  @CallOnAnyThread
+  public void setParamsForUpdateTask(int idTask){
+      taskRepository.updateTask(idTask);
   }
 }

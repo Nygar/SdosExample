@@ -20,9 +20,9 @@ public interface TaskCache {
   /**
    * Puts and element into the cache.
    *
-   * @param userId The id used to get data.
+   * @param userEntity The task data to save.
    */
-  void put(TaskEntity userEntity, int userId);
+  void put(TaskEntity userEntity);
 
   /**
    * Checks if an element (User) exists in the cache.
@@ -45,4 +45,11 @@ public interface TaskCache {
    * @param userId The id used to get data.
    */
   void evictAll(int userId);
+
+  /**
+   * Change task status
+   *
+   * @param idTask task to update.
+   */
+  void refresh(int idTask);
 }

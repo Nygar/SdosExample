@@ -36,9 +36,19 @@ public class DiskTaskDataStore implements TaskDataStore {
   }
 
   @Override
-  public void postTask(TaskEntity taskEntity, int idUser) {
+  public void updateTask(int idTask) {
     PostEvent res = new PostEvent();
-    cache.put(taskEntity, idUser);
+    cache.refresh(idTask);
+    res.setEntities("Tarea Actualizada");
+
+    new Handler().post(() -> EventBus.getDefault().post(res));
+  }
+
+  @Override
+  public void postTask(TaskEntity taskEntity) {
+    PostEvent res = new PostEvent();
+    cache.put(taskEntity);
+    res.setEntities("Tarea Insertada");
 
     new Handler().post(() -> EventBus.getDefault().post(res));
   }

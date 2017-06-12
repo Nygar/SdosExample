@@ -3,12 +3,12 @@ package com.sdos.android.sample.presentation.data.cache.impl;
 import android.content.Context;
 
 import com.sdos.android.sample.presentation.data.cache.FileManager;
-import com.sdos.android.sample.presentation.data.cache.ProductCache;
 import com.sdos.android.sample.presentation.data.cache.TaskCache;
-import com.sdos.android.sample.presentation.data.cache.UserCache;
+import com.sdos.android.sample.presentation.data.entity.IntegerRealmObject;
 import com.sdos.android.sample.presentation.data.entity.TaskEntity;
 import com.sdos.android.sample.presentation.data.entity.UserEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,7 +18,7 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 
 /**
- * {@link ProductCache} implementation.
+ * {@link TaskCache} implementation.
  */
 @Singleton
 public class TaskCacheImpl implements TaskCache {
@@ -74,10 +74,28 @@ public class TaskCacheImpl implements TaskCache {
   }
 
   @Override
-  public void put(TaskEntity userEntity, int userId) {
-    if (userEntity != null) {
+  public void put(TaskEntity taskEntity) {
+    if (taskEntity != null) {
       realm= Realm.getDefaultInstance();
-      realm.executeTransaction(bgRealm -> bgRealm.copyToRealmOrUpdate(userEntity));
+
+      RealmResults<UserEntity>  userEntity = realm.where(UserEntity.class).equalTo("taskList.integer",taskEntity.getTypeTask()).findAll();
+
+      UserEntity selected = null;
+      int lessHour = Integer.MAX_VALUE;
+      int auxHour;
+
+      for (UserEntity user: userEntity) {
+        auxHour= realm.where(TaskEntity.class).equalTo("userId",String.valueOf(user.getId())).equalTo("end",false).sum("duration").intValue();
+        if(auxHour<lessHour || selected==null){
+          lessHour=auxHour;
+          selected=user;
+        }
+      }
+
+      taskEntity.setIdTask(realm.where(TaskEntity.class).max("idTask").intValue()+1);
+      taskEntity.setUserId(String.valueOf(selected.getId()));
+
+      realm.executeTransaction(bgRealm -> bgRealm.copyToRealmOrUpdate(taskEntity));
       realm.close();
       setLastCacheUpdateTimeMillis();
     }
@@ -113,6 +131,14 @@ public class TaskCacheImpl implements TaskCache {
     realm= Realm.getDefaultInstance();
     RealmResults<TaskEntity> result = realm.where(TaskEntity.class).equalTo("userId",String.valueOf(userId)).findAll();
     realm.executeTransaction(bgRealm -> result.deleteAllFromRealm());
+    realm.close();
+  }
+
+  @Override
+  public void refresh(int idTask) {
+    realm= Realm.getDefaultInstance();
+    TaskEntity result = realm.where(TaskEntity.class).equalTo("idTask",idTask).findFirst();
+    realm.executeTransaction(bgRealm -> result.setEnd(!result.isEnd()));
     realm.close();
   }
 }

@@ -90,9 +90,7 @@ public class TechnicalFragment extends BaseFragment implements MainView {
     }
 
     //Listener for TasAdapter click
-    private TaskModelAdapter.TasAdapterInterface tasAdapterInterface = model -> {
-
-    };
+    private TaskModelAdapter.TasAdapterInterface tasAdapterInterface = model -> taskPresenter.updateTask(model.getIdTask());
 
     @Override
     public void showLoading() {

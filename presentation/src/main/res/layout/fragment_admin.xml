@@ -18,6 +18,7 @@
             >
 
             <EditText
+                android:id="@+id/task_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/admin_description"
@@ -25,19 +26,29 @@
                 />
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        >
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/TextInputLayoutStyle"
-            >
+            android:textSize="18sp"
+            android:text="@string/admin_type"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/secondary_color"
+            />
 
-            <EditText
+            <Spinner
+                android:id="@+id/admin_type_task_spinner"
+                android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/admin_type"
-                android:singleLine="true"
                 />
-        </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

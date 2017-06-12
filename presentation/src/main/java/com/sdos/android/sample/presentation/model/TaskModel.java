@@ -10,7 +10,7 @@ public class TaskModel {
   private String description;
   private int duration;
   private boolean end;
-  private String idTask;
+  private int idTask;
   private String userId;
 
   public TaskModel() {
@@ -61,11 +61,11 @@ public class TaskModel {
     this.end = end;
   }
 
-  public String getIdTask() {
+  public int getIdTask() {
     return idTask;
   }
 
-  public void setIdTask(String idTask) {
+  public void setIdTask(int idTask) {
     this.idTask = idTask;
   }
 

@@ -40,7 +40,9 @@ public class WServicePresenter implements Presenter {
   }
 
   @Override public void resume() {
-    EventBus.getDefault().register(this);
+    if (!EventBus.getDefault().isRegistered(this)) {
+      EventBus.getDefault().register(this);
+    }
 
   }
 

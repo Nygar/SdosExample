@@ -31,6 +31,7 @@ dependencies {
   annotationProcessor presentationDependencies.daggerCompiler
   annotationProcessor presentationDependencies.butterKnifeCompiler
   annotationProcessor presentationDependencies.fragmentArgsPro
+  annotationProcessor presentationDependencies.stitchAnottation
   compile presentationDependencies.dagger
   compile presentationDependencies.butterKnife
   compile presentationDependencies.recyclerView
@@ -42,13 +43,9 @@ dependencies {
   compile presentationDependencies.hideKeyboard
   compile presentationDependencies.retrofit
   compile presentationDependencies.retrofitGson
-
-  compile "com.daimajia.swipelayout:library:1.2.0@aar"
-
-  compile 'org.greenrobot:eventbus:3.0.0'
-
-  compile 'com.github.amitkma:stitch-lib:1.0.1'
-  annotationProcessor 'com.github.amitkma:compiler:1.0.1'
+  compile presentationDependencies.stitchCompiler
+  compile presentationDependencies.eventbus
+  compile presentationDependencies.swipelayout
 
 
 }

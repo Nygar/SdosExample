@@ -83,7 +83,7 @@ public class TaskModelAdapter extends RecyclerSwipeAdapter<TaskModelAdapter.Base
             holder.img.setImageResource(R.drawable.ic_clear_black_24dp);
         }
 
-        holder.relativeLayout.setOnClickListener(v -> {
+        holder.completeButton.setOnClickListener(v -> {
             holder.swipeLayout.close();
             holder.swipeLayout.setRightSwipeEnabled(false);
 
@@ -125,7 +125,7 @@ public class TaskModelAdapter extends RecyclerSwipeAdapter<TaskModelAdapter.Base
         SwipeLayout swipeLayout;
 
         @BindView(R.id.bottom_wrapper)
-        RelativeLayout relativeLayout;
+        RelativeLayout completeButton;
 
         @BindView(R.id.row_task_check)
         ImageView img;

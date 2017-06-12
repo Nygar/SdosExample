@@ -18,11 +18,12 @@ ext {
   rxJavaVersion = '2.0.8'
   rxAndroidVersion = '2.0.1'
   gsonVersion = '2.5'
-  picassoVersion = '2.5.2'
-  transformationsVersion = '2.1.0'
   retrofit = '2.2.0'
   fragmentArgs = '3.0.2'
   hideKeyboard = '1.0.0'
+  swipelayout = '1.2.0@aar'
+  eventbus ='3.0.0'
+  stitch='1.0.1'
 
   presentationDependencies = [
       daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
@@ -31,16 +32,18 @@ ext {
       butterKnifeCompiler:"com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
       recyclerView:       "com.android.support:recyclerview-v7:${androidSupport}",
       cardview:           "com.android.support:cardview-v7:${androidSupport}",
-      picasso:            "com.squareup.picasso:picasso:${picassoVersion}",
       appCompat:          "com.android.support:appcompat-v7:${androidSupport}",
       supportDesign:      "com.android.support:design:${androidSupport}",
-      transformations:    "jp.wasabeef:picasso-transformations:${transformationsVersion}",
       androidAnnotations: "com.android.support:support-annotations:${androidSupport}",
       fragmentArgs:       "com.hannesdorfmann.fragmentargs:annotation:${fragmentArgs}",
       fragmentArgsPro:    "com.hannesdorfmann.fragmentargs:processor:${fragmentArgs}",
       hideKeyboard:       "com.irozon.keyhide:keyhide:${hideKeyboard}",
       retrofit:           "com.squareup.retrofit2:retrofit:${retrofit}",
-      retrofitGson:       "com.squareup.retrofit2:converter-gson:${retrofit}"
+      retrofitGson:       "com.squareup.retrofit2:converter-gson:${retrofit}",
+      swipelayout:        "com.daimajia.swipelayout:library:${swipelayout}",
+      eventbus:           "org.greenrobot:eventbus:${eventbus}",
+      stitchCompiler:     "com.github.amitkma:stitch-lib:${stitch}",
+      stitchAnottation:   "com.github.amitkma:compiler:${stitch}"
 
   ]
 }

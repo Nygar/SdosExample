@@ -43,7 +43,9 @@ public class TaskPresenter implements Presenter {
   }
 
   @Override public void resume() {
-    EventBus.getDefault().register(this);
+    if (!EventBus.getDefault().isRegistered(this)) {
+      EventBus.getDefault().register(this);
+    }
 
   }
 
@@ -79,15 +81,15 @@ public class TaskPresenter implements Presenter {
   }
 
   public void getTaskList(int idUser) {
-    getTaskUseCase.setParams(null,idUser);
-
-    getTaskUseCase.execute();
+    getTaskUseCase.setParamsForGetTask(idUser);
   }
 
-  public void postTask(TaskModel taskModel, int idUser) {
-    getTaskUseCase.setParams(null,idUser);
+  public void postTask(TaskModel taskModel) {
+    getTaskUseCase.setParamsForPostTask(taskEntityDataMapper.transform(taskModel));
+  }
 
-    getTaskUseCase.execute();
+  public void updateTask(int idTask) {
+    getTaskUseCase.setParamsForUpdateTask(idTask);
   }
 
   @Subscribe

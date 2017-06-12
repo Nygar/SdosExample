@@ -10,6 +10,8 @@ public interface TaskDataStore {
 
   void getTask(int idUser);
 
-  void postTask(TaskEntity taskEntity, int idUser);
+  void postTask(TaskEntity taskEntity);
+
+  void updateTask(int idTask);
 
 }

@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toolbar;
 
+import com.irozon.library.HideKey;
 import com.sdos.android.sample.presentation.R;
 import com.sdos.android.sample.presentation.R2;
 import com.sdos.android.sample.presentation.view.di.HasComponent;
@@ -45,6 +46,7 @@ public class MainActivity extends BaseActivity implements HasComponent<MainCompo
         setContentView(R.layout.activity_layout_toolbar);
 
         ButterKnife.bind(this);
+        HideKey.initialize(this);
         this.initializeActivity(savedInstanceState);
         this.initializeInjector();
     }

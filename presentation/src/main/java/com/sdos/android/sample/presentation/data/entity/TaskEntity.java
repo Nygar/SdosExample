@@ -1,6 +1,7 @@
 package com.sdos.android.sample.presentation.data.entity;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Class that represents a task in the presentation layer.
@@ -12,7 +13,8 @@ public class TaskEntity extends RealmObject {
   private String description;
   private int duration;
   private boolean end;
-  private String idTask;
+  @PrimaryKey
+  private int idTask;
   private String userId;
 
   public TaskEntity() {
@@ -26,7 +28,7 @@ public class TaskEntity extends RealmObject {
     this.end = end;
   }
 
-  public TaskEntity(String name, int typeTask, String description, int duration, boolean end, String idTask, String userId) {
+  public TaskEntity(String name, int typeTask, String description, int duration, boolean end, int idTask, String userId) {
     this.name = name;
     this.typeTask = typeTask;
     this.description = description;
@@ -81,11 +83,11 @@ public class TaskEntity extends RealmObject {
     this.end = end;
   }
 
-  public String getIdTask() {
+  public int getIdTask() {
     return idTask;
   }
 
-  public void setIdTask(String idTask) {
+  public void setIdTask(int idTask) {
     this.idTask = idTask;
   }
 

@@ -35,8 +35,14 @@ public class TaskDataRepository implements GetTaskUseCase.TaskRepository {
   }
 
   @Override
-  public void postTask(TaskEntity taskEntity, int idUser) {
+  public void updateTask(int idTask) {
     final TaskDataStore taskDataStore = this.taskDataStoreFactory.create();
-    taskDataStore.postTask(taskEntity,idUser);
+    taskDataStore.updateTask(idTask);
+  }
+
+  @Override
+  public void postTask(TaskEntity taskEntity) {
+    final TaskDataStore taskDataStore = this.taskDataStoreFactory.create();
+    taskDataStore.postTask(taskEntity);
   }
 }
